@@ -1,3 +1,12 @@
+## Senior Design - Student Life Improvement Application 
+
+### `Members`
+Jerry Noftz - noftzjs@mail.uc.edu<br />
+John Ireland - irelanjc@mail.uc.edu<br />
+Stew Bertke - bertketm@mail.uc.edu<br />
+
+<br />
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
