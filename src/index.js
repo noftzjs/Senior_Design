@@ -1,12 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+//import App from './components/app/App';
 import * as serviceWorker from './serviceWorker';
+import SubmissionForm from './components/submission-component/submission-component';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <SubmissionForm />
   </React.StrictMode>,
   document.getElementById('root')
 );
