@@ -1,6 +1,7 @@
 import React from 'react';
 import logo from '../../../src/logo.svg';
 import './App.css';
+<<<<<<< Updated upstream
 
 function App() {
   return (
@@ -12,6 +13,19 @@ function App() {
         </p>
       </header>
     </div>
+=======
+import NavBar from '../nav/navbar';
+import LandingPage from '../landing-page/landing-page';
+import login from '../login/loginapp'
+
+function App() {
+  return (
+    <React.Fragment>
+      <NavBar></NavBar>
+      <LandingPage></LandingPage>
+      <login></login>
+    </React.Fragment>
+>>>>>>> Stashed changes
   );
 }
 
