@@ -21,7 +21,7 @@ function LandingPage() {
 
     useEffect(() => {
         setAppState({ loading: true });
-        const apiUrl = `http://localhost:9000/posts/`;
+        const apiUrl = `http://localhost:9000/submissions/`;
         fetch(apiUrl)
             .then((res) => res.json())
             .then((posts) => {
