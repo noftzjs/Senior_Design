@@ -33,3 +33,7 @@ label {
 .vote.on {
   background-position: 0 2px;
 }
+
+.voteCount {
+  float: right;
+}
