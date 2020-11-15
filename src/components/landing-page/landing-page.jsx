@@ -1,7 +1,6 @@
 import React, { Component, useEffect, useState } from "react";
 import {
-    MDBContainer, MDBRow, MDBCol, MDBBtn, MDBInput, MDBModal, MDBModalBody, MDBModalHeader, MDBModalFooter, MDBIcon,
-    MDBBadge
+     MDBIcon, MDBBadge
 } from "mdbreact";
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import "bootstrap-css-only/css/bootstrap.min.css";
