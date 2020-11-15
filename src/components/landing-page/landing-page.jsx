@@ -10,6 +10,7 @@ import './landing-page.css';
 import List from './list';
 import withListLoading from './withListLoading';
 import Submissions from '../submission-component/index'
+import topSubmissions from "./topSubs";
 
 
 function LandingPage() {
@@ -31,9 +32,13 @@ function LandingPage() {
     return (
         <div class="">
             <div class="row">
-                <div class="col-3"></div>
+                <div class="col-3">
+                    <h1 class="mt-2">Top</h1>
+                    <hr />
+                    <topSubmissions></topSubmissions>
+                </div>
                 <div class="col-lg-6 col-centered">
-                    <h1 class="mt-2">Posts</h1>
+                    <h1 class="mt-2">Submission</h1>
                     <hr />
                     <div class='post-container'>
                         <ListLoading isLoading={appState.loading} posts={appState.posts} />

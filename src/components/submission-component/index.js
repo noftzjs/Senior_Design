@@ -31,62 +31,6 @@ class Submissions extends Component {
             console.log(error);
         })
     }
-// submitForm = async () => {
-//     e.preventDefault();
-//     console.log(this.state);
-//     this.setState({ isSubmitting: true });
-
-//     const res = await fetch("http://localhost:9000/submissions", {
-//         method: "POST",
-//         body: JSON.stringify(this.state.values),
-//         headers: {
-//             "Content-Type": "application/json"
-//         }
-//     });
-//     this.setState({ isSubmitting: false });
-//     const data = await res.json();
-//     // !data.hasOwnProperty("error")
-// };
-// submitForm = async e => {
-//     fetch("http://localhost:9000/submissions", {
-//         method: "POST",
-//         body: JSON.stringify(this.state.values),
-//         headers: {
-//             "Content-Type": "application/json; charset=UTF-8"
-//         }
-//     })
-//     .then(response => response.json())
-//     .then(json => console.log(json));
-// }
-
-
-// handleInputChange = e =>
-// this.setState({
-//   values: { ...this.state.values, [e.target.name]: e.target.value }
-// })
-
-// constructor() {
-//     super();
-//     this.handleSubmit = this.handleSubmit.bind(this);
-// }
-
-
-    //     fetch("http://localhost:9000/posts/", {
-    //         method: 'POST',
-    //         headers: { 'Content-Type': 'application/json' },
-    //         body: JSON.stringify(data)
-    //     }).then((response) => {
-    //         if (response.status >= 400) {
-    //             throw new Error("Bad response from server");
-    //         }
-    //         console.log(response)
-    //         return response.json();
-    //     }).then((respData) => {
-    //         console.log(respData);
-    //     }).catch((err) => {
-    //         console.log(err);
-    //     });
-    // }
 
     render() {
         const { uploadID, title, discription, upVotes, userID } = this.state
