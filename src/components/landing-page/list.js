@@ -7,16 +7,6 @@ const List = (props) => {
     const { posts } = props;
     if (!posts || posts.length === 0) return <p>No Submissions, sorry</p>;
 
-    
-
-    // function upVoteSub() {
-    //   try {
-    //     Axios.put(`http://localhost:9000/submissions/upVote/${posts.uploadID}/`)
-    //   } catch (e) {
-    //     yourErrorHandler(e)
-    //   }
-    // }
-
     return (
       <div>
         {posts.map((posts) => {
@@ -33,7 +23,7 @@ const List = (props) => {
                   <button class="vote" onClick={upVoteSub}></button>
                   <span class="voteCount">{posts.upVotes}</span>
                 </div>
-                <h3 class="post-title">{posts.title} {posts.uploadID}</h3>
+                <h3 class="post-title">{posts.title}</h3>
                 <p class="post-dis">{posts.discription}</p>
               </div>
             </div>

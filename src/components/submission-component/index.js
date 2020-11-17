@@ -36,7 +36,7 @@ class Submissions extends Component {
         const { uploadID, title, discription, upVotes, userID } = this.state
         return (
             <div>
-                <h1>Submissions</h1>
+                <h1>New Submissions</h1>
                 <form onSubmit={this.submitHandler}>
                     <label htmlFor="title">Title</label>
                     <input
@@ -46,7 +46,7 @@ class Submissions extends Component {
                         onChange={this.changeHandler}
                     />
                     <hr />
-                    <label htmlFor="discription">discription</label>
+                    <label htmlFor="discription">Description</label>
                     <textarea
                         name="discription"
                         type="text"
@@ -65,7 +65,7 @@ class Submissions extends Component {
                         onChange={this.changeHandler}
                         /> */}
                     <hr />
-                    <button type="submit">Submit</button>
+                    <button type="button" class="btn btn-primary">Submit</button>
                 </form>
             </div>
         );

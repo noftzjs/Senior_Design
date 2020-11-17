@@ -6,14 +6,8 @@ import { Nav } from "react-bootstrap";
 import admin from "../admin/admin-component";
 import {Link} from 'react-router';
 
-class NavBar extends Component {
-state = {
-  isOpen: false
-};
 
-toggleCollapse = () => {
-  this.setState({ isOpen: !this.state.isOpen });
-}
+class LandingNav extends React.Component{
 
 render() {
   return (
@@ -22,7 +16,7 @@ render() {
       <Navbar bg="primary" variant="dark">
         <Navbar.Brand>Student Life</Navbar.Brand>
         <Nav className="mr-auto">
-          <Nav.Link href="#!">Home</Nav.Link>
+          <Nav.Link href="/">Home</Nav.Link>
           <Nav.Link a href="https://www.ucstudentgov.org/summer-report-2020">UCSG Reports</Nav.Link>
           <NavDropdown title="Executive Officers" id="basic-nav-dropdown">
             <NavDropdown.Item href="mailto:lindsaln@mail.uc.edu">Logan Lindsay | President</NavDropdown.Item>
@@ -33,13 +27,13 @@ render() {
             <NavDropdown.Item href="mailto:bollimta@mail.uc.edu">Teja Bollimunta | External Holdover Senator</NavDropdown.Item>
           </NavDropdown>
           </Nav>
-          <Nav>
+          {/* <Nav>
             <NavLink to="/admin">Admin</NavLink>
-          </Nav>
+          </Nav> */}
       </Navbar>
     </Router>
     );
   }
 }
 
-export default NavBar;
+export default LandingNav;
