@@ -43,12 +43,14 @@ class admin extends Component {
             }
         ]
         return (
-
-            <ReactTable
-            data={this.state.submissions}
-            columns={columns}
-            className="-striped -highlight"
-            />
+            <div className="admin-table">
+                <ReactTable
+                data={this.state.submissions}
+                columns={columns}
+                className="-striped -highlight"
+                />
+            </div>
+            
          )
     }
 }

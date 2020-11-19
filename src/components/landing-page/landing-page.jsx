@@ -10,6 +10,7 @@ import List from './list';
 import withListLoading from './withListLoading';
 import Submissions from '../submission-component/index'
 import topSubmissions from "./topSubs";
+import SimpleModal from "../modal/submit-modal";
 
 
 function LandingPage() {
@@ -32,19 +33,20 @@ function LandingPage() {
         <div class="">
             <div class="row">
                 <div class="col-3">
-                    <h1 class="mt-2">Top</h1>
+                    <h1 class="mt-2">New Submission</h1>
                     <hr />
-                    <topSubmissions></topSubmissions>
+                    <SimpleModal></SimpleModal>
+                    {/* <topSubmissions></topSubmissions> */}
                 </div>
                 <div class="col-lg-6 col-centered">
-                    <h1 class="mt-2">Submission</h1>
+                    <h1 class="mt-2">Current Requests</h1>
                     <hr />
                     <div class='post-container'>
                         <ListLoading isLoading={appState.loading} posts={appState.posts} />
                     </div>
                 </div>
                 <div class="col-3">
-                    <Submissions></Submissions>
+                    {/* <Submissions></Submissions> */}
                 </div>
             </div>
         </div>

@@ -19,9 +19,9 @@ const List = (props) => {
             <div key={posts.title} class="card mb-2">
               <div class="container">
                 <div>
-                  {/* <span class="vote"></span> */}
-                  <button class="vote" onClick={upVoteSub}></button>
-                  <span class="voteCount">{posts.upVotes}</span>
+                  <button type="button" class="btn btn-primary vote" onClick={upVoteSub}>
+                     Upvote <span class="badge badge-light voteCount">{posts.upVotes}</span>
+                  </button>
                 </div>
                 <h3 class="post-title">{posts.title}</h3>
                 <p class="post-dis">{posts.discription}</p>

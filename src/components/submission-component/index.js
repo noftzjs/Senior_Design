@@ -32,14 +32,17 @@ class Submissions extends Component {
         })
     }
 
+
     render() {
         const { uploadID, title, discription, upVotes, userID } = this.state
         return (
-            <div>
-                <h1>New Submissions</h1>
+            <div className="form-group">
+                <h1>New Submission</h1>
+                <hr/>
                 <form onSubmit={this.submitHandler}>
                     <label htmlFor="title">Title</label>
                     <input
+                        class="form-control"
                         name="title"
                         type="text"
                         value={title}
@@ -48,24 +51,15 @@ class Submissions extends Component {
                     <hr />
                     <label htmlFor="discription">Description</label>
                     <textarea
+                        rows="12"
+                        class="form-control desBox"
                         name="discription"
                         type="text"
                         value={discription}
                         onChange={this.changeHandler}
                     />
-                    {/* <hr />
-                    <label htmlFor="upVotes">Support? 0/1</label>
-                    <input name="upVotes" type="text" />
-                    <hr /> */}
-                    {/* <label htmlFor="userID">UserID: 1/2</label>
-                    <input
-                        name="userID"
-                        type="text"
-                        value={userID}
-                        onChange={this.changeHandler}
-                        /> */}
                     <hr />
-                    <button type="button" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
             </div>
         );

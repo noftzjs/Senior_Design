@@ -5,7 +5,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { Nav } from "react-bootstrap";
 import admin from "../admin/admin-component";
 import {Link} from 'react-router';
-
+import SimpleModal from "../modal/submit-modal";
 
 class LandingNav extends React.Component{
 
@@ -27,9 +27,9 @@ render() {
             <NavDropdown.Item href="mailto:bollimta@mail.uc.edu">Teja Bollimunta | External Holdover Senator</NavDropdown.Item>
           </NavDropdown>
           </Nav>
-          {/* <Nav>
-            <NavLink to="/admin">Admin</NavLink>
-          </Nav> */}
+          <Nav>
+            <Nav.Link href="/admin">Admin</Nav.Link>
+          </Nav>
       </Navbar>
     </Router>
     );
