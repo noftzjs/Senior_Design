@@ -8,6 +8,8 @@ import './App.css';
 import LandingNav from '../nav/navbar';
 import LandingPage from '../landing-page/landing-page';
 import admin from '../admin/admin-component';
+import login from '../landing-page/login/login';
+import Login from '../landing-page/login/login';
 
 function App() {
   return (
@@ -17,6 +19,7 @@ function App() {
             <Switch>
               <Route path="/" component={LandingPage} exact/>
               <Route path="/admin" component={admin} />
+              <Route path="/login" component={Login} />
             <Route component={Error}/>
            </Switch>
     </div>

@@ -30,6 +30,7 @@ render() {
           <Nav>
             <Nav.Link href="/admin">Admin</Nav.Link>
           </Nav>
+          <Nav.Link href="/login">Login</Nav.Link>
       </Navbar>
     </Router>
     );
