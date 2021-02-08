@@ -2,11 +2,11 @@ import Axios from "axios";
 import React, { Component } from "react";
 import ReactTable from "react-table";
 import 'react-table/react-table.css'
-import { Link } from 'react-router';
 
 
 
-class admin extends Component {
+
+class Admin extends Component {
     constructor(props){
         super(props)
         this.state = { 
@@ -55,4 +55,4 @@ class admin extends Component {
     }
 }
  
-export default admin;
+export default Admin;

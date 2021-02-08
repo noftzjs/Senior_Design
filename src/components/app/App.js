@@ -1,13 +1,11 @@
-import '@fortawesome/fontawesome-free/css/all.min.css';
-import 'bootstrap-css-only/css/bootstrap.min.css';
-import 'mdbreact/dist/css/mdb.css';
-
-import React, { Component } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './App.css';
 import LandingNav from '../nav/navbar';
 import LandingPage from '../landing-page/landing-page';
-import admin from '../admin/admin-component';
+import Admin from '../admin/admin-component';
+import Progress from '../progress-report/progress-component';
 
 function App() {
   return (
@@ -16,7 +14,8 @@ function App() {
     <LandingNav></LandingNav>
             <Switch>
               <Route path="/" component={LandingPage} exact/>
-              <Route path="/admin" component={admin} />
+              <Route path="/admin" component={Admin} />
+              <Route path="/progress" component={Progress} />
             <Route component={Error}/>
            </Switch>
     </div>

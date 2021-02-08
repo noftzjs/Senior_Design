@@ -1,23 +1,18 @@
-import React, { Component, Button } from "react";
-import { NavDropdown, NavLink } from "react-bootstrap";
+import React from "react";
+import { NavDropdown } from "react-bootstrap";
 import Navbar from 'react-bootstrap/Navbar';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Nav } from "react-bootstrap";
-import admin from "../admin/admin-component";
-import {Link} from 'react-router';
-import SimpleModal from "../modal/submit-modal";
 
 class LandingNav extends React.Component{
 
 render() {
   return (
     <Router>
-
       <Navbar bg="primary" variant="dark">
-        <Navbar.Brand>Student Life</Navbar.Brand>
+        <Navbar.Brand href="/">Student Life +</Navbar.Brand>
         <Nav className="mr-auto">
-          <Nav.Link href="/">Home</Nav.Link>
-          <Nav.Link a href="https://www.ucstudentgov.org/summer-report-2020">UCSG Reports</Nav.Link>
+          <Nav.Link a href="/progress">UCSG Reports</Nav.Link>
           <NavDropdown title="Executive Officers" id="basic-nav-dropdown">
             <NavDropdown.Item href="mailto:lindsaln@mail.uc.edu">Logan Lindsay | President</NavDropdown.Item>
             <NavDropdown.Item href="mailto:dierkike@mail.uc.edu">Karl Dierking | Vice President</NavDropdown.Item>

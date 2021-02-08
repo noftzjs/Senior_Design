@@ -1,55 +1,68 @@
-import React, { Component, useEffect, useState } from "react";
-import {
-     MDBIcon, MDBBadge
-} from "mdbreact";
-import '@fortawesome/fontawesome-free/css/all.min.css';
-import "bootstrap-css-only/css/bootstrap.min.css";
-import "mdbreact/dist/css/mdb.css";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import '@fortawesome/fontawesome-svg-core';
+
+import React, { useEffect, useState } from "react";
 import './landing-page.css';
-import List from './list';
-import withListLoading from './withListLoading';
-import Submissions from '../submission-component/index'
-import topSubmissions from "./topSubs";
-import SimpleModal from "../modal/submit-modal";
+import Axios from 'axios';
+import SimpleModal from '../modal/submit-modal';
+import Submissions from "./Submissions";
 
+export const axios = Axios.create({
+    baseURL: `http://localhost:9000`,
+    headers: {
+        'Content-type': `application/json`
+    }
+})
 
-function LandingPage() {
-    const ListLoading = withListLoading(List);
-    const [appState, setAppState] = useState({
-        loading: false,
-        posts: null,
-    });
+const LandingPage = () => {
+
+    const [newSubmission, setNewSubmission] = useState("");
+    const [submissions, setSubmissions] = useState([]);
+
+    // const HandleSubmit = (e) => {
+    //     e.preventDefault()
+    //     if(!newSubmission) {
+
+    //     } else {
+    //         const addSubmission = {
+    //             title: 
+    //         }
+    //     }
+    // }
+
+    const getSubmissions = () => {
+        axios.get('submissions')
+            .then(response => setSubmissions(response.data))
+    }
 
     useEffect(() => {
-        setAppState({ loading: true });
-        const apiUrl = `http://localhost:9000/submissions/`;
-        fetch(apiUrl)
-            .then((res) => res.json())
-            .then((posts) => {
-                setAppState({ loading: false, posts: posts });
-            });
-    }, [setAppState]);
+        getSubmissions();
+    }, []);
+
     return (
-        <div class="">
-            <div class="row">
-                <div class="col-3">
-                    <h1 class="mt-2">New Submission</h1>
-                    <hr />
-                    <SimpleModal></SimpleModal>
-                    {/* <topSubmissions></topSubmissions> */}
-                </div>
-                <div class="col-lg-6 col-centered">
-                    <h1 class="mt-2">Current Requests</h1>
-                    <hr />
-                    <div class='post-container'>
-                        <ListLoading isLoading={appState.loading} posts={appState.posts} />
+        <main>
+            <div className="">
+                <div className="row">
+                    <div className="col-3">
+                    </div>
+                    <div className="col-lg-6 col-centered">
+                        <div style={{ columnCount: "2", columnWidth: "100%" }}>
+                            <h1>Current Requests</h1>
+                            <div style={{float: "right"}}>
+                                <SimpleModal></SimpleModal>
+                            </div>
+                        </div>
+                        <hr />
+                        <div className='post-container'>
+                            <Submissions submissions={submissions} />
+                        </div>
+                    </div>
+                    <div className="col-3">
+                        {/* <Submissions></Submissions> */}
                     </div>
                 </div>
-                <div class="col-3">
-                    {/* <Submissions></Submissions> */}
-                </div>
             </div>
-        </div>
+        </main>
     );
 }
 

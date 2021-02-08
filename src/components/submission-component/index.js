@@ -1,6 +1,12 @@
 import Axios from 'axios';
 import React, { Component } from 'react';
 
+export const axios = Axios.create({
+    baseURL: `http://localhost:9000`,
+    headers: {
+        'Content-type': `application/json`
+    }
+})
 
 class Submissions extends Component {
 
@@ -20,10 +26,12 @@ class Submissions extends Component {
         this.setState({[ e.target.name]: e.target.value })
     }
 
-    submitHandler = e => {
+    submitHandler = (e) => {
         e.preventDefault()
         console.log(this.state)
-        Axios.post('http://localhost:9000/submissions', this.state)
+        axios.post('submissions', {
+            uploadID: this.state.uploadID
+        })
         .then(response => {
             console.log(response)
         })
@@ -34,7 +42,7 @@ class Submissions extends Component {
 
 
     render() {
-        const { uploadID, title, discription, upVotes, userID } = this.state
+        const { uploadID, title, description, upVotes, userID } = this.state
         return (
             <div className="form-group">
                 <h1>New Submission</h1>
@@ -49,13 +57,13 @@ class Submissions extends Component {
                         onChange={this.changeHandler}
                     />
                     <hr />
-                    <label htmlFor="discription">Description</label>
+                    <label htmlFor="description">Description</label>
                     <textarea
                         rows="12"
                         class="form-control desBox"
-                        name="discription"
+                        name="description"
                         type="text"
-                        value={discription}
+                        value={description}
                         onChange={this.changeHandler}
                     />
                     <hr />
