@@ -1,87 +1,68 @@
-import React, { Component, useEffect, useState } from "react";
-import {
-    MDBContainer, MDBRow, MDBCol, MDBBtn, MDBInput, MDBModal, MDBModalBody, MDBModalHeader, MDBModalFooter, MDBIcon,
-    MDBBadge
-} from "mdbreact";
-import '@fortawesome/fontawesome-free/css/all.min.css';
-import "bootstrap-css-only/css/bootstrap.min.css";
-import "mdbreact/dist/css/mdb.css";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import '@fortawesome/fontawesome-svg-core';
+
+import React, { useEffect, useState } from "react";
+import Iframe from '../../providers/iframe';
+import pdfFile from '../../documents/Undergraduate_Student_Government_Demographic_Report_20202021.pdf';
 import './landing-page.css';
-import List from './list';
-import withListLoading from './withListLoading';
-import Submissions from '../submission-component/index'
+import Axios from 'axios';
+import SimpleModal from '../modal/submit-modal';
+import Submissions from "./Submissions";
+//import ModalService from '../../providers/modal';
 
+export const axios = Axios.create({
+    baseURL: `http://localhost:9000`,
+    headers: {
+        'Content-type': `application/json`
+    }
+})
 
-function LandingPage() {
-    const ListLoading = withListLoading(List);
-    const [appState, setAppState] = useState({
-        loading: false,
-        posts: null,
-    });
+const LandingPage = () => {
+
+    const [newSubmission, setNewSubmission] = useState("");
+    const [submissions, setSubmissions] = useState([]);
+
+    const getSubmissions = () => {
+        axios.get('submissions')
+            .then(response => setSubmissions(response.data))
+    }
 
     useEffect(() => {
-        setAppState({ loading: true });
-        const apiUrl = `http://localhost:9000/posts/`;
-        fetch(apiUrl)
-            .then((res) => res.json())
-            .then((posts) => {
-                setAppState({ loading: false, posts: posts });
-            });
-    }, [setAppState]);
+        getSubmissions();
+    }, []);
+
     return (
-        <div class="">
-            <div class="row">
-                <div class="col-3"></div>
-                <div class="col-lg-6 col-centered">
-                    <h1 class="mt-2">Posts</h1>
-                    <hr />
-                    <div class='post-container'>
-                        <ListLoading isLoading={appState.loading} posts={appState.posts} />
+        <main>
+            <div className="">
+                <div className="row">
+                    <div className="col-3">
+                        {/* <ModalService></ModalService> */}
                     </div>
-                </div>
-                <div class="col-3">
-                    <Submissions></Submissions>
+                    <div className="col-lg-6 col-centered">
+                        <div style={{ columnCount: "2", columnWidth: "100%" }}>
+                            <h1>Current Requests</h1>
+                            <div style={{ float: "right" }}>
+                                <SimpleModal></SimpleModal>
+                            </div>
+                        </div>
+                        <hr />
+                        <div className='post-container'>
+                            <Submissions submissions={submissions} />
+                            <div className="card mb-2">
+                                <article>
+                                    <Iframe source={pdfFile} style={{ height: "100%" }} />
+                                    <hr />
+                                    <button type="submit" class="btn btn-primary">Comment</button>
+                                </article>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="col-3">
+                    </div>
                 </div>
             </div>
-        </div>
+        </main>
     );
-}
-
-class Post extends Component {
-    render() {
-        return (
-            <React.Fragment>
-                <div className="media mt-1">
-                    <h3 className="h3-responsive font-weight-bold mr-3">
-                        {this.props.time}
-                    </h3>
-                    <div className="media-body mb-3 mb-lg-3">
-                        <MDBBadge
-                            color="danger"
-                            className="ml-2 float-right"
-                            onClick={() => this.props.onDelete(this.props.id)}
-                        >
-                            -
-            </MDBBadge>
-                        <h6 className="mt-0 font-weight-bold">{this.props.title} </h6>{" "}
-                        <hr className="hr-bold my-2" />
-                        {this.props.location && (
-                            <React.Fragment>
-                                <p className="font-smaller mb-0">
-                                    <MDBIcon icon="location-arrow" /> {this.props.location}
-                                </p>
-                            </React.Fragment>
-                        )}
-                    </div>
-                </div>
-                {this.props.description && (
-                    <p className="p-2 mb-4  blue-grey lighten-5 blue-grey lighten-5">
-                        {this.props.description}
-                    </p>
-                )}
-            </React.Fragment>
-        );
-    }
 }
 
 export default LandingPage;

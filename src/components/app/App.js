@@ -1,18 +1,28 @@
-import '@fortawesome/fontawesome-free/css/all.min.css';
-import 'bootstrap-css-only/css/bootstrap.min.css';
-import 'mdbreact/dist/css/mdb.css';
-
+import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './App.css';
-import NavBar from '../nav/navbar';
+import LandingNav from '../nav/navbar';
 import LandingPage from '../landing-page/landing-page';
+import Admin from '../admin/admin-component';
+import Progress from '../progress-report/progress-component';
+import Login from '../landing-page/login';
+
 
 function App() {
   return (
-    <React.Fragment>
-      <NavBar></NavBar>
-      <LandingPage></LandingPage>
-    </React.Fragment>
+    <BrowserRouter>
+    <div>
+    <LandingNav></LandingNav>
+            <Switch>
+              <Route path="/" component={LandingPage} exact/>
+              <Route path="/admin" component={Admin} />
+              <Route path="/progress" component={Progress} />
+              <Route path="/login" component={Login} />
+            <Route component={Error}/>
+           </Switch>
+    </div>
+    </BrowserRouter>
   );
 }
 export default App;

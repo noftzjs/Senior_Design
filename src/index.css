@@ -1,3 +1,11 @@
+.center {
+  margin-top: 10%;
+  margin-left: 25%;
+  height: 50%;
+  width: 50%;
+  padding: 0;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -12,8 +20,70 @@ code {
     monospace;
 }
 
+h1, h2 {
+  color: #53626f;
+}
+
 label {
   float: left;
   width: 10em;
   margin-right: 1em;
   }
+
+.vote {
+  float: right;
+} 
+
+.vote.on {
+  background-position: 0 2px;
+}
+
+.voteCount {
+  left: 15px;
+}
+
+.modal-bg {
+      background-color: white;
+      padding: 1em;
+      border-radius: 25px;
+}
+
+.desBox {
+  resize: none;
+  height: 325px;
+  width: 600px;
+}
+
+
+#adminSubs {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#adminSubs td, #adminSubs th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#adminSubs tr:nth-child(even){background-color: #f2f2f2;}
+
+#adminSubs tr:hover {background-color: #ddd;}
+
+#adminSubs th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #4CAF50;
+  color: white;
+}
+.admin-table {
+  width: 90%;
+  height: 90%;
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}

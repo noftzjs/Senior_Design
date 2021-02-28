@@ -1,53 +1,77 @@
+import Axios from 'axios';
 import React, { Component } from 'react';
 
+export const axios = Axios.create({
+    baseURL: `http://localhost:9000`,
+    headers: {
+        'Content-type': `application/json`
+    }
+})
+
 class Submissions extends Component {
-    constructor() {
-        super();
-        this.handleSubmit = this.handleSubmit.bind(this);
+
+    constructor(props) {
+        super(props)
+
+        this.state = {
+            uploadID: "1",
+            title: "",
+            discription: "",
+            upVotes: "0",
+            userID: "1",
+        }
     }
 
-    handleSubmit(event) {
-        event.preventDefault();
-        const data = new FormData(event.target);
+    changeHandler = (e) => {
+        this.setState({[ e.target.name]: e.target.value })
+    }
 
-        fetch("http://localhost:9000/posts/", {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(data)
-        }).then((response) => {
-            if (response.status >= 400) {
-                throw new Error("Bad response from server");
-            }
+    submitHandler = (e) => {
+        e.preventDefault()
+        console.log(this.state)
+        axios.post('submissions', {
+            uploadID: this.state.uploadID
+        })
+        .then(response => {
             console.log(response)
-            return response.json();
-        }).then((respData) => {
-            console.log(respData);
-        }).catch((err) => {
-            console.log(err);
-        });
+        })
+        .catch(error => {
+            console.log(error);
+        })
     }
+
 
     render() {
+        const { uploadID, title, description, upVotes, userID } = this.state
         return (
-            <div class="mt-4">
-                <h1>Submissions</h1>
-                <form onSubmit={this.handleSubmit}>
-                    <label htmlFor="Title">Title</label>
-                    <input id="Title" name="Title" type="text" />
+            <div className="form-group">
+                <h1>New Submission</h1>
+                <hr/>
+                <form onSubmit={this.submitHandler}>
+                    <label htmlFor="title">Title</label>
+                    <input
+                        class="form-control"
+                        name="title"
+                        type="text"
+                        value={title}
+                        onChange={this.changeHandler}
+                        required
+                    />
                     <hr />
-                    <label htmlFor="discription">discription</label>
-                    <input id="discription" name="discription" type="" />
+                    <label htmlFor="description">Description</label>
+                    <textarea
+                        rows="12"
+                        class="form-control desBox"
+                        name="description"
+                        type="text"
+                        value={description}
+                        onChange={this.changeHandler}
+                        required
+                    />
                     <hr />
-                    <label htmlFor="upVotes">Support? 0/1</label>
-                    <input id="upVotes" name="upVotes" type="text" />
-                    <hr />
-                    <label htmlFor="userID">UserID: 1/2</label>
-                    <input id="userID" name="userID" type="text" />
-                    <hr />
-                    <button>Submit</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
             </div>
-
         );
     }
 }
