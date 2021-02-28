@@ -8,7 +8,7 @@ const Progress = (props) => {
 
     return (
         <div>
-            <Iframe source={pdfFile} />
+            <Iframe source={pdfFile}/>
         </div>
     );
 }

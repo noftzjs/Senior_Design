@@ -1,10 +1,10 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import Modal from '@material-ui/core/Modal';
 import Submissions from '../submission-component/index';
 
 export default function SimpleModal() {
    
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
 
   const handleOpen = () => {
     setOpen(true);

@@ -55,6 +55,7 @@ class Submissions extends Component {
                         type="text"
                         value={title}
                         onChange={this.changeHandler}
+                        required
                     />
                     <hr />
                     <label htmlFor="description">Description</label>
@@ -65,6 +66,7 @@ class Submissions extends Component {
                         type="text"
                         value={description}
                         onChange={this.changeHandler}
+                        required
                     />
                     <hr />
                     <button type="submit" class="btn btn-primary">Submit</button>

@@ -20,6 +20,10 @@ code {
     monospace;
 }
 
+h1, h2 {
+  color: #53626f;
+}
+
 label {
   float: left;
   width: 10em;
