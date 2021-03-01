@@ -11,7 +11,7 @@ import Submissions from "./Submissions";
 //import ModalService from '../../providers/modal';
 
 export const axios = Axios.create({
-    baseURL: `http://localhost:9000`,
+    baseURL: `https://studentlifebackend.herokuapp.com/`,
     headers: {
         'Content-type': `application/json`
     }
