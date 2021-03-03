@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Axios from 'axios';
 
 export const axios = Axios.create({
@@ -8,9 +8,10 @@ export const axios = Axios.create({
   }
 })
 
-const Submission = ({ uploadID, title, description, upVotes }) => {
+const Submission = ({ uploadID, title, description, upVotes, userID }) => {
 
   const [showComment, setShowComment] = useState(false)
+
   //const onClick = () => setShowComment(true)
 
   // const getComments = (uploadID) => {
@@ -18,26 +19,26 @@ const Submission = ({ uploadID, title, description, upVotes }) => {
   //     .then(response => setSubmissions(response.data))
   // }
 
+
+
   return (
     <div className="card mb-2">
       <article>
         <span>
-          <h1>{uploadID} {title}</h1>
+          <h1>{userID}{title}</h1>
           <h2 className="vote">{upVotes}<button className="arrow up"></button><button className="arrow down"></button></h2>
         </span>
         <p>{description}</p>
+        <p>Submitted By {userID}</p>
         <hr />
-        {/* <button id="comment" type="button" class="btn btn-primary">Comment</button> */}
-        <span className="minimize" onClick={() => setShowComment(!showComment)}>[{showComment ? "+" : "-"}]</span>
+        <span className="minimize" onClick={() => setShowComment(!showComment)}>Comments [{showComment ? "+" : "-"}]</span>
         {showComment && <CommentSection />}
-
       </article>
     </div>
   )
 }
 
 const CommentSection = () => {
-
 
   return (
     <div className="search-results">
@@ -61,5 +62,7 @@ const CommentSection = () => {
     </div>
   );
 };
+
+
 
 export default Submission;

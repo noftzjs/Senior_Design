@@ -3,6 +3,7 @@ import { NavDropdown } from "react-bootstrap";
 import Navbar from 'react-bootstrap/Navbar';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Nav } from "react-bootstrap";
+import Login from "../landing-page/login";
 
 class LandingNav extends React.Component {
 
@@ -23,8 +24,8 @@ class LandingNav extends React.Component {
             </NavDropdown>
           </Nav>
           <Nav>
-            <Nav.Link href="/login">Login</Nav.Link>
-            <Nav.Link href="/admin">Admin</Nav.Link>
+            <Nav.Link >{<Login/>}</Nav.Link>
+            {/* <Nav.Link href="/admin">Admin</Nav.Link> */}
           </Nav>
         </Navbar>
       </Router>

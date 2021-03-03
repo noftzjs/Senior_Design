@@ -1,23 +1,19 @@
 .center {
   margin-top: 10%;
   margin-left: 25%;
-  height: 50%;
   width: 50%;
   padding: 0;
 }
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
 h1, h2 {
@@ -28,11 +24,11 @@ label {
   float: left;
   width: 10em;
   margin-right: 1em;
-  }
+}
 
 .vote {
   float: right;
-} 
+}
 
 .vote.on {
   background-position: 0 2px;
@@ -42,18 +38,29 @@ label {
   left: 15px;
 }
 
+.voteArrowUp {
+  position: relative;
+  left: -22px;
+  top: 5px;
+}
+
+.voteArrowDown {
+  position: relative;
+  left: -12px;
+  top: -35px;
+}
+
 .modal-bg {
-      background-color: white;
-      padding: 1em;
-      border-radius: 25px;
+  background-color: white;
+  padding: 1em;
+  border-radius: 25px;
+  
 }
 
 .desBox {
   resize: none;
-  height: 325px;
-  width: 600px;
+  height: fit-content;
 }
-
 
 #adminSubs {
   font-family: Arial, Helvetica, sans-serif;
@@ -66,9 +73,13 @@ label {
   padding: 8px;
 }
 
-#adminSubs tr:nth-child(even){background-color: #f2f2f2;}
+#adminSubs tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
 
-#adminSubs tr:hover {background-color: #ddd;}
+#adminSubs tr:hover {
+  background-color: #ddd;
+}
 
 #adminSubs th {
   padding-top: 12px;
@@ -77,6 +88,7 @@ label {
   background-color: #4CAF50;
   color: white;
 }
+
 .admin-table {
   width: 90%;
   height: 90%;

@@ -42,11 +42,17 @@ body {
 .up {
   transform: rotate(-135deg);
   -webkit-transform: rotate(-135deg);
+  position: relative;
+  left: 8px;
+  top: -20px;
 }
 
 .down {
   transform: rotate(45deg);
   -webkit-transform: rotate(45deg);
+  position: relative;
+  left: -1px;
+  top: -4px;
 }
 
 textarea {
