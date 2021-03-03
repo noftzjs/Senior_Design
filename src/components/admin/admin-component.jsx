@@ -16,7 +16,7 @@ class Admin extends Component {
     }
     
     async getSubmissionData() {
-        const res = await Axios.get(`http://localhost:9000/submissions/`)
+        const res = await Axios.get(`https://studentlifebackend.herokuapp.com/submissions/`)
         this.setState({loading:false, submissions: res.data})
     }
 
