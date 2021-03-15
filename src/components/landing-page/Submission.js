@@ -3,7 +3,7 @@ import Axios from 'axios';
 import './landing-page.css'
 
 export const axios = Axios.create({
-  baseURL: `http://localhost:9000`,
+  baseURL: `https://studentlifebackend.herokuapp.com/`,
   headers: {
     'Content-type': `application/json`
   }
