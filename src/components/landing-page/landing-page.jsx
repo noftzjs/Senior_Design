@@ -19,76 +19,62 @@ export const axios = Axios.create({
 
 const LandingPage = () => {
 
+
     const [newSubmission, setNewSubmission] = useState({
         uploadID: "1",
         title: "",
         discription: "",
         upVotes: "0",
-        userID: "1"
+        userID: "2"
     });
 
     const [submissions, setSubmissions] = useState([]);
-    const [submissionName, SetSubmissionName] = useState("")
-    const [open, setOpen] = useState(false);
-
+    const [topSubmissions, setTopSubmissions] = useState([]);
+    // const [submitter, setSubmitter] = useState("")
+    const [isOpen, setIsOpen] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
     const uploadID = 1
-
-    // const getSubmissions = () => {
-    //     axios.get('submissions')
-    //         .then(response => setSubmissions(response.data))
-    // }
-
 
     const postSubmission = (e) => {
         e.preventDefault()
         axios.post('submissions', newSubmission)
             .then(response => {
                 console.log(response)
+                setIsLoading(true)
             })
             .catch(error => {
                 console.log(error);
             })
+        setIsLoading(false)
         handleClose();
-        // getSubmissions();
     }
 
-
-
     const handleOpen = () => {
-        setOpen(true);
+        setIsOpen(true);
     };
 
     const handleClose = () => {
-        setOpen(false);
+        setIsOpen(false);
     };
 
     const changeHandler = (e) => {
         setNewSubmission({ ...newSubmission, [e.target.name]: e.target.value });
     }
 
-    const getSubmissions = () => {
-        axios.get('submissions')
-            .then(response => setSubmissions(response.data))
-    };
-    const getSubmissionUser = () => {
-        axios.get('Users/' + 1)
-            .then(response => SetSubmissionName(response.data))
-    }
+    // const Top = () => {
+    //     if (submissions.upVotes < 10) {
+    //         setTopSubmissions(submissions.title)
+    //     }
+    //     return(topSubmissions)
+    // }
 
     useEffect(() => {
-
         const getSubmissions = async () => {
             axios.get('submissions')
                 .then(response => setSubmissions(response.data))
         };
         getSubmissions();
-    }, [newSubmission]);
-
-    // useEffect(() => {
-    //     Axios.all([getSubmissions(), getSubmissionUser()])
-    //         .then(Axios.spread(function (subs, subUsers) {
-    //         }))
-    // })
+    }, [isLoading]);
 
     const body = (
         <div className="center modal-bg">
@@ -119,9 +105,40 @@ const LandingPage = () => {
                         />
                     </div>
                     <hr />
-                    <button type="submit" className="btn btn-primary">Submit</button>
+                    <div className="flex-container">
+                        <button type="submit" onClick={() => setIsLoading(false)} className="btn btn-primary">Submit</button>
+                        <div className="push">
+                            <label className="anonymous">Post Anonymously</label>
+                            <label className="switch">
+                                <input type="checkbox" />
+                                <span className="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
                 </form>
             </div>
+        </div>
+    );
+
+    const guidelines = (
+        <div>
+            <h2>Posting Guidelines</h2>
+            <ul>
+                <h3>What is acceptable:</h3>
+                <li>Constructive Criticism</li>
+                <li>An angry tone in a post that does not disparage another individual or group of people.</li>
+                <li>An angry tone that does not use profanity.</li>
+                <li>Anonymity due to posting about a confidential topic.</li>
+                <li>Being respectful while voicing need for improvement.</li>
+                <li>Clean images that help get your point across.</li>
+                <h3>What is unacceptable:</h3>
+                <li>Inappropriate images (if you have to ask yourself “is this appropriate?” it is likely not appropriate)</li>
+                <li>Slander</li>
+                <li>Libel</li>
+                <li>Victimizing an individual or a group of people.</li>
+                <li>Vulgarity</li>
+                <li>Criticism that is not constructive</li>
+            </ul>
         </div>
     );
 
@@ -139,7 +156,7 @@ const LandingPage = () => {
                                     <button type="button" className="btn btn-primary" onClick={handleOpen}>
                                         New Submission</button>
                                     <Modal
-                                        open={open}
+                                        open={isOpen}
                                         onClose={handleClose}
                                         aria-labelledby="simple-modal-title"
                                         aria-describedby="simple-modal-description"
@@ -162,6 +179,7 @@ const LandingPage = () => {
                         </div>
                     </div>
                     <div className="col-3">
+                        {guidelines}
                     </div>
                 </div>
             </div>
