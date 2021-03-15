@@ -24,7 +24,7 @@ class LandingNav extends React.Component {
             </NavDropdown>
           </Nav>
           <Nav>
-            <Nav.Link >{<Login/>}</Nav.Link>
+            <Nav.Link href="/login" >Login</Nav.Link>
             {/* <Nav.Link href="/admin">Admin</Nav.Link> */}
           </Nav>
         </Navbar>

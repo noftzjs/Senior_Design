@@ -1,5 +1,5 @@
 .center {
-  margin-top: 10%;
+  margin-top: 5%;
   margin-left: 25%;
   width: 50%;
   padding: 0;
@@ -16,7 +16,7 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
-h1, h2 {
+h1, h2, h3 {
   color: #53626f;
 }
 
