@@ -10,7 +10,7 @@ class LandingNav extends React.Component {
   render() {
     return (
       <Router>
-        <Navbar bg="primary" variant="dark">
+        <Navbar className="navbar-color">
           <Navbar.Brand href="/">Student Life +</Navbar.Brand>
           <Nav className="mr-auto">
             <Nav.Link a href="/progress">UCSG Reports</Nav.Link>

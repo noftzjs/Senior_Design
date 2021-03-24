@@ -27,10 +27,9 @@ const LandingPage = () => {
         upVotes: "0",
         userID: "2"
     });
-
+    const [showGuidelines, setShowGuidelines] = useState(false);
     const [submissions, setSubmissions] = useState([]);
     const [topSubmissions, setTopSubmissions] = useState([]);
-    // const [submitter, setSubmitter] = useState("")
     const [isOpen, setIsOpen] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const uploadID = 1
@@ -60,13 +59,6 @@ const LandingPage = () => {
     const changeHandler = (e) => {
         setNewSubmission({ ...newSubmission, [e.target.name]: e.target.value });
     }
-
-    // const Top = () => {
-    //     if (submissions.upVotes < 10) {
-    //         setTopSubmissions(submissions.title)
-    //     }
-    //     return(topSubmissions)
-    // }
 
     useEffect(() => {
         const getSubmissions = async () => {
@@ -120,27 +112,28 @@ const LandingPage = () => {
         </div>
     );
 
-    const guidelines = (
-        <div>
-            <h2>Posting Guidelines</h2>
-            <ul>
-                <h3>What is acceptable:</h3>
-                <li>Constructive Criticism</li>
-                <li>An angry tone in a post that does not disparage another individual or group of people.</li>
-                <li>An angry tone that does not use profanity.</li>
-                <li>Anonymity due to posting about a confidential topic.</li>
-                <li>Being respectful while voicing need for improvement.</li>
-                <li>Clean images that help get your point across.</li>
-                <h3>What is unacceptable:</h3>
-                <li>Inappropriate images (if you have to ask yourself “is this appropriate?” it is likely not appropriate)</li>
-                <li>Slander</li>
-                <li>Libel</li>
-                <li>Victimizing an individual or a group of people.</li>
-                <li>Vulgarity</li>
-                <li>Criticism that is not constructive</li>
-            </ul>
-        </div>
-    );
+    const Guidelines = () => {
+        return (
+            <div>
+                <ul>
+                    <h3>What is acceptable:</h3>
+                    <li>Constructive Criticism</li>
+                    <li>An angry tone in a post that does not disparage another individual or group of people.</li>
+                    <li>An angry tone that does not use profanity.</li>
+                    <li>Anonymity due to posting about a confidential topic.</li>
+                    <li>Being respectful while voicing need for improvement.</li>
+                    <li>Clean images that help get your point across.</li>
+                    <h3>What is unacceptable:</h3>
+                    <li>Inappropriate images (if you have to ask yourself “is this appropriate?” it is likely not appropriate)</li>
+                    <li>Slander</li>
+                    <li>Libel</li>
+                    <li>Victimizing an individual or a group of people.</li>
+                    <li>Vulgarity</li>
+                    <li>Criticism that is not constructive</li>
+                </ul>
+            </div>
+        )
+    };
 
     return (
         <main>
@@ -153,7 +146,7 @@ const LandingPage = () => {
                             <h1>Current Requests</h1>
                             <div style={{ float: "right" }}>
                                 <div>
-                                    <button type="button" className="btn btn-primary" onClick={handleOpen}>
+                                    <button type="button" className="btn btn-danger" onClick={handleOpen}>
                                         New Submission</button>
                                     <Modal
                                         open={isOpen}
@@ -169,17 +162,19 @@ const LandingPage = () => {
                         <hr />
                         <div className='post-container'>
                             <Submissions submissions={submissions} />
-                            <div className="card mb-2">
+                            {/* <div className="card mb-2">
                                 <article>
                                     <Iframe source={pdfFile} style={{ height: "100%" }} />
                                     <hr />
                                     <button type="submit" className="btn btn-primary">Comment</button>
                                 </article>
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                     <div className="col-3">
-                        {guidelines}
+                        <h2 className="guidelines-header minimize" onClick={() => setShowGuidelines(!showGuidelines)}>Posting Guidelines</h2>
+                        <hr />
+                        {showGuidelines && <Guidelines />}
                     </div>
                 </div>
             </div>

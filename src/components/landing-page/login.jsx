@@ -1,6 +1,33 @@
-import React, { useState, useReducer } from 'react';
+
+import React, { useState, useReducer, useContext } from 'react';
 import Axios from 'axios';
 import { login } from '../../providers/utils';
+
+const UserContext = React.createContext({name: '', auth: false});
+
+export const UserProvider = ({ children }) => {
+  const [username, setUsername] = React.useState({ name: '', auth: false });
+
+  const login = (name) => {
+    setUsername((username) => ({
+      name: name,
+      auth: true,
+    }));
+  };
+
+  const logout = () => {
+    setUsername((username) => ({
+      name: '',
+      auth: false,
+    }));
+  };
+
+  return (
+    <UserContext.Provider value={{ username, login, logout }}>
+      {children}
+    </UserContext.Provider>
+  );
+};
 
 function loginReducer(state, action) {
   switch (action.type) {
@@ -88,7 +115,7 @@ const Login = () => {
             <hr />
             {error && <p className='error'>{error}</p>}
             {/* <label>UC Email</label> */}
-            <input type='text' className='form-control' placeholder='UC Email'
+            <input type='text' className='form-control' placeholder='UC ID'
               value={userEmail}
               onChange={(e) =>
                 dispatch({
@@ -117,6 +144,3 @@ const Login = () => {
 }
 
 export default Login;
-
-
-
