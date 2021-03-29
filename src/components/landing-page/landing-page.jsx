@@ -1,13 +1,14 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '@fortawesome/fontawesome-svg-core';
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import Iframe from '../../providers/iframe';
 import pdfFile from '../../documents/Undergraduate_Student_Government_Demographic_Report_20202021.pdf';
 import './landing-page.css';
 import Axios from 'axios';
 import Submissions from "./Submissions";
 import Modal from '@material-ui/core/Modal';
+import { AuthContext } from '../../providers/AuthContext';
 
 
 export const axios = Axios.create({
@@ -19,20 +20,27 @@ export const axios = Axios.create({
 
 const LandingPage = () => {
 
-
+    const { username } = useContext(AuthContext);
+    const { isLoggedin } = useContext(AuthContext);
+    const [isAnonymous, setIsAnonymous] = useState(false);
+    const [isRepost, setIsRepost] = useState(false);
+    const [isFeedback, setIsFeedback] = useState(false);
+    const [isSuggestion, setIsSuggestion] = useState(false);
     const [newSubmission, setNewSubmission] = useState({
-        uploadID: "1",
+        uploadID: "",
         title: "",
         discription: "",
         upVotes: "0",
-        userID: "2"
+        userID: "2",
+        anonymous: isAnonymous,
+        repost: isRepost,
+        feedback: isFeedback,
+        suggestion: isSuggestion
     });
     const [showGuidelines, setShowGuidelines] = useState(false);
     const [submissions, setSubmissions] = useState([]);
-    const [topSubmissions, setTopSubmissions] = useState([]);
     const [isOpen, setIsOpen] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
-    const uploadID = 1
 
     const postSubmission = (e) => {
         e.preventDefault()
@@ -59,6 +67,14 @@ const LandingPage = () => {
     const changeHandler = (e) => {
         setNewSubmission({ ...newSubmission, [e.target.name]: e.target.value });
     }
+
+    // const handleToggle = (e) => {
+    //     setIsAnonymous(!isAnonymous)
+    // }
+
+    // const toggleStyle = {
+
+    // }
 
     useEffect(() => {
         const getSubmissions = async () => {
@@ -96,9 +112,14 @@ const LandingPage = () => {
                             required
                         />
                     </div>
+                    <div className="fas fa-container-storage">
+                        <button onClick={() => setIsRepost(!isRepost)} type="button" className="btn btn-danger" data-toggle="button" aria-pressed="false" autocomplete="off">Repost</button>
+                        <button onClick={() => setIsFeedback(!isFeedback)} type="button" className="btn btn-outline-danger" data-toggle="button" aria-pressed="false" autocomplete="off">Feedback</button>
+                        <button onClick={() => setIsSuggestion(!isSuggestion)} type="button" className="btn btn-danger" data-toggle="button" aria-pressed="false" autocomplete="off">Suggestion</button>
+                    </div>
                     <hr />
                     <div className="flex-container">
-                        <button type="submit" onClick={() => setIsLoading(false)} className="btn btn-primary">Submit</button>
+                        <button type="submit" onClick={() => setIsLoading(false)} className="btn btn-danger">Submit</button>
                         <div className="push">
                             <label className="anonymous">Post Anonymously</label>
                             <label className="switch">
@@ -137,7 +158,11 @@ const LandingPage = () => {
 
     return (
         <main>
-            <div className="">
+            <div className="jumbotron" id="mission-statement">
+                <h1 className="display-4 text-white">Student Life+</h1>
+                <p className="lead">Student Life+ is the culmination of ideas from three University of Cincinnati Seniors to leave behind a better campus for underclassmen, providing an open dialogue between the University and the Student Body.</p>
+            </div>
+            <div>
                 <div className="row">
                     <div className="col-3">
                     </div>
@@ -146,7 +171,7 @@ const LandingPage = () => {
                             <h1>Current Requests</h1>
                             <div style={{ float: "right" }}>
                                 <div>
-                                    <button type="button" className="btn btn-danger" onClick={handleOpen}>
+                                    <button disabled={!isLoggedin ? true : false} type="button" className="btn btn-danger" onClick={handleOpen}>
                                         New Submission</button>
                                     <Modal
                                         open={isOpen}

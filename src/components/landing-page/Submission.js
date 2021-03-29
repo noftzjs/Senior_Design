@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
+import { AuthContext } from '../../providers/AuthContext';
 import Axios from 'axios';
 import './landing-page.css'
 
@@ -11,13 +12,10 @@ export const axios = Axios.create({
 
 const Submission = ({ uploadID, title, description, upVotes, userID }) => {
 
+  const { username } = useContext(AuthContext);
+  const { isLoggedin } = useContext(AuthContext);
   const [showComment, setShowComment] = useState(false);
   const [subComments, setSubComments] = useState([]);
-  const [newComment, setNewComment] = useState({
-    userID: "",
-    uploadID: "",
-    comment: ""
-  });
   const [submitter, setSubmitter] = useState("");
   const [commenter, setCommenter] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -46,29 +44,64 @@ const Submission = ({ uploadID, title, description, upVotes, userID }) => {
     }
     fetchData()
 
-  }, [isLoading]); //This should be changed to onNewComment submissions. But I currently don't have that added yet. 
+  }, [isLoading]); 
 
   const CommentSection = () => {
 
+    const [newComment, setNewComment] = useState({
+      userID: 1,
+      uploadID: uploadID,
+      comment: ""
+    });
+    //Comment userID needs to be pulled in from useContext
+
+    const [alert, setAlert] = useState(false);
+
+    const postComment = (e) => {
+      if (newComment.comment.length === 0) {
+        setAlert(true)
+        return;
+      }
+      e.preventDefault()
+      axios.post('comments', newComment)
+        .then(response => {
+          console.log(response)
+          setIsLoading(true)
+        })
+        .catch(error => {
+          console.log(error);
+        })
+      setAlert(false)
+      setIsLoading(false)
+    }
+
+    const changeHandler = (e) => {
+      setNewComment({ ...newComment, [e.target.name]: e.target.value });
+    }
+
     return (
-      <div className="search-results">
+      <form className="search-results">
         <textarea
           placeholder="What are your thoughts?"
           minrows={2}
-          defaultValue=""
+          name="comment"
+          type="text"
+          onChange={changeHandler}
+          required
         />
+        {alert && <p>Requires text to submit</p>}
         <div className="panel">
           <div className="comment_as">
             {/* Comment as {" "} */}
             <a href="" className="username">
             </a>
           </div>
-          <button className="btn btn-danger">COMMENT</button>
+          <button disabled={!isLoggedin ? true : false} className="btn btn-danger" onClick={postComment}>COMMENT</button>
           <div className="comment-thread">
             <Comment />
           </div>
         </div>
-      </div>
+      </form>
     );
   }
 

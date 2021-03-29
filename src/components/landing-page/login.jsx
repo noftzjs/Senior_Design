@@ -1,33 +1,8 @@
 
 import React, { useState, useReducer, useContext } from 'react';
-import Axios from 'axios';
+import { Redirect } from "react-router-dom";
 import { login } from '../../providers/utils';
-
-const UserContext = React.createContext({name: '', auth: false});
-
-export const UserProvider = ({ children }) => {
-  const [username, setUsername] = React.useState({ name: '', auth: false });
-
-  const login = (name) => {
-    setUsername((username) => ({
-      name: name,
-      auth: true,
-    }));
-  };
-
-  const logout = () => {
-    setUsername((username) => ({
-      name: '',
-      auth: false,
-    }));
-  };
-
-  return (
-    <UserContext.Provider value={{ username, login, logout }}>
-      {children}
-    </UserContext.Provider>
-  );
-};
+import { AuthContext } from '../../providers/AuthContext';
 
 function loginReducer(state, action) {
   switch (action.type) {
@@ -47,6 +22,7 @@ function loginReducer(state, action) {
     case 'success': {
       return {
         ...state,
+
         isLoggedIn: true,
         isLoading: false,
       };
@@ -85,14 +61,17 @@ const Login = () => {
 
   const [state, dispatch] = useReducer(loginReducer, initialState);
   const { userEmail, password, isLoading, error, isLoggedIn } = state;
+  const { username, setUsername } = useContext(AuthContext);
+  const { isLoggedin, setIsLoggedin } = useContext(AuthContext);
 
   const onSubmit = async (e) => {
     e.preventDefault();
-
     dispatch({ type: 'login' });
 
     try {
       await login({ userEmail, password });
+      setUsername(userEmail);
+      setIsLoggedin(true);
       dispatch({ type: 'success' });
     } catch (error) {
       dispatch({ type: 'error' });
@@ -104,10 +83,7 @@ const Login = () => {
       <div className="form-group">
         {isLoggedIn ? (
           <>
-            <h1>Welcome {userEmail}!</h1>
-            <button onClick={() => dispatch({ type: 'logOut' })}>
-              Log Out
-            </button>
+            return<Redirect to="/" />
           </>
         ) : (
           <form className='form' onSubmit={onSubmit}>
@@ -142,5 +118,6 @@ const Login = () => {
     </div>
   );
 }
+
 
 export default Login;
