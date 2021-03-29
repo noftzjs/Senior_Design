@@ -10,7 +10,7 @@ export const axios = Axios.create({
   }
 })
 
-const Submission = ({ uploadID, title, description, upVotes, userID }) => {
+const Submission = ({ uploadID, title, description, upVotes, userID, anonymous }) => {
 
   const { username } = useContext(AuthContext);
   const { isLoggedin } = useContext(AuthContext);
@@ -144,7 +144,7 @@ const Submission = ({ uploadID, title, description, upVotes, userID }) => {
           <h2 className="vote">{upVotes}<button className="arrow up"></button><button className="arrow down"></button></h2>
         </span>
         <p>{description}</p>
-        <p>Submitted By <SubUsername /></p>
+        <p>Submitted By {<SubUsername />}</p>
         <hr />
         <span className="minimize" onClick={() => setShowComment(!showComment)}>Comments [{showComment ? "-" : "+"}]</span>
         {showComment && <CommentSection />}

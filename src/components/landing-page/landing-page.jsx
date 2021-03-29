@@ -1,7 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '@fortawesome/fontawesome-svg-core';
 
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState, useContext, useCallback } from "react";
 import Iframe from '../../providers/iframe';
 import pdfFile from '../../documents/Undergraduate_Student_Government_Demographic_Report_20202021.pdf';
 import './landing-page.css';
@@ -22,21 +22,18 @@ const LandingPage = () => {
 
     const { username } = useContext(AuthContext);
     const { isLoggedin } = useContext(AuthContext);
-    const [isAnonymous, setIsAnonymous] = useState(false);
-    const [isRepost, setIsRepost] = useState(false);
-    const [isFeedback, setIsFeedback] = useState(false);
-    const [isSuggestion, setIsSuggestion] = useState(false);
     const [newSubmission, setNewSubmission] = useState({
         uploadID: "",
         title: "",
         discription: "",
-        upVotes: "0",
+        upVotes: "1",
         userID: "2",
-        anonymous: isAnonymous,
-        repost: isRepost,
-        feedback: isFeedback,
-        suggestion: isSuggestion
+        anonymous: false,
+        repost: false,
+        feedback: false,
+        suggestion: false
     });
+
     const [showGuidelines, setShowGuidelines] = useState(false);
     const [submissions, setSubmissions] = useState([]);
     const [isOpen, setIsOpen] = useState(false);
@@ -52,7 +49,7 @@ const LandingPage = () => {
             .catch(error => {
                 console.log(error);
             })
-        setIsLoading(false)
+        setIsLoading(false);
         handleClose();
     }
 
@@ -68,13 +65,9 @@ const LandingPage = () => {
         setNewSubmission({ ...newSubmission, [e.target.name]: e.target.value });
     }
 
-    // const handleToggle = (e) => {
-    //     setIsAnonymous(!isAnonymous)
-    // }
-
-    // const toggleStyle = {
-
-    // }
+    const toggleHandler = (e) => {
+        setNewSubmission({ ...newSubmission, [e.target.name]: e.target.checked });
+    }
 
     useEffect(() => {
         const getSubmissions = async () => {
@@ -112,21 +105,27 @@ const LandingPage = () => {
                             required
                         />
                     </div>
-                    <div className="fas fa-container-storage">
-                        <button onClick={() => setIsRepost(!isRepost)} type="button" className="btn btn-danger" data-toggle="button" aria-pressed="false" autocomplete="off">Repost</button>
-                        <button onClick={() => setIsFeedback(!isFeedback)} type="button" className="btn btn-outline-danger" data-toggle="button" aria-pressed="false" autocomplete="off">Feedback</button>
-                        <button onClick={() => setIsSuggestion(!isSuggestion)} type="button" className="btn btn-danger" data-toggle="button" aria-pressed="false" autocomplete="off">Suggestion</button>
+                    <div className="btn-group" data-toggle="buttons">
+                        <label className="btn btn-danger">
+                            <input onChange={toggleHandler} type="checkbox" name="repost" id="option1" /> Repost
+                        </label>
+                        <label className="btn btn-danger">
+                            <input onChange={toggleHandler} type="checkbox" name="feedback" id="option2" /> Feedback
+                        </label>
+                        <label className="btn btn-danger">
+                            <input onChange={toggleHandler} type="checkbox" name="suggestion" id="option3" /> Suggestion
+                        </label>
                     </div>
                     <hr />
                     <div className="flex-container">
                         <button type="submit" onClick={() => setIsLoading(false)} className="btn btn-danger">Submit</button>
-                        <div className="push">
+                        {/* <div className="push">
                             <label className="anonymous">Post Anonymously</label>
                             <label className="switch">
-                                <input type="checkbox" />
+                                <input onChange={toggleHandler} name="anonymous" type="checkbox" />
                                 <span className="slider round"></span>
                             </label>
-                        </div>
+                        </div> */}
                     </div>
                 </form>
             </div>
