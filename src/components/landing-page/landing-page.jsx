@@ -2,8 +2,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '@fortawesome/fontawesome-svg-core';
 
 import React, { useEffect, useState, useContext, useCallback } from "react";
-import Iframe from '../../providers/iframe';
-import pdfFile from '../../documents/Undergraduate_Student_Government_Demographic_Report_20202021.pdf';
 import './landing-page.css';
 import Axios from 'axios';
 import Submissions from "./Submissions";
@@ -119,13 +117,6 @@ const LandingPage = () => {
                     <hr />
                     <div className="flex-container">
                         <button type="submit" onClick={() => setIsLoading(false)} className="btn btn-danger">Submit</button>
-                        {/* <div className="push">
-                            <label className="anonymous">Post Anonymously</label>
-                            <label className="switch">
-                                <input onChange={toggleHandler} name="anonymous" type="checkbox" />
-                                <span className="slider round"></span>
-                            </label>
-                        </div> */}
                     </div>
                 </form>
             </div>
@@ -159,40 +150,33 @@ const LandingPage = () => {
         <main>
             <div className="jumbotron" id="mission-statement">
                 <h1 className="display-4 text-white">Student Life+</h1>
-                <p className="lead">Student Life+ is the culmination of ideas from three University of Cincinnati Seniors to leave behind a better campus for underclassmen, providing an open dialogue between the University and the Student Body.</p>
+                <p className="lead mission-statement">Student Life+ is the culmination of ideas from three University of Cincinnati Seniors to leave behind a better campus for underclassmen, providing an open dialogue between the University and the Student Body.</p>
             </div>
             <div>
                 <div className="row">
                     <div className="col-3">
+                        <div style={{ float: "center" }}>
+                            <div>
+                                <button disabled={!isLoggedin ? true : false} type="button" className="btn btn-danger" onClick={handleOpen}>
+                                    New Submission</button>
+                                <Modal
+                                    open={isOpen}
+                                    onClose={handleClose}
+                                    aria-labelledby="simple-modal-title"
+                                    aria-describedby="simple-modal-description"
+                                >
+                                    {body}
+                                </Modal>
+                            </div>
+                        </div>
                     </div>
                     <div className="col-lg-6 col-centered">
                         <div style={{ columnCount: "2", columnWidth: "100%" }}>
                             <h1>Current Requests</h1>
-                            <div style={{ float: "right" }}>
-                                <div>
-                                    <button disabled={!isLoggedin ? true : false} type="button" className="btn btn-danger" onClick={handleOpen}>
-                                        New Submission</button>
-                                    <Modal
-                                        open={isOpen}
-                                        onClose={handleClose}
-                                        aria-labelledby="simple-modal-title"
-                                        aria-describedby="simple-modal-description"
-                                    >
-                                        {body}
-                                    </Modal>
-                                </div>
-                            </div>
                         </div>
                         <hr />
                         <div className='post-container'>
                             <Submissions submissions={submissions} />
-                            {/* <div className="card mb-2">
-                                <article>
-                                    <Iframe source={pdfFile} style={{ height: "100%" }} />
-                                    <hr />
-                                    <button type="submit" className="btn btn-primary">Comment</button>
-                                </article>
-                            </div> */}
                         </div>
                     </div>
                     <div className="col-3">

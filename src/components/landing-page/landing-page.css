@@ -7,6 +7,13 @@
   height: 350px;
   background-image: linear-gradient(to bottom, rgba(0,0,0,0.6) 0%,rgba(0,0,0,0.6) 100%), url("/src/documents/UC_sign_at_night.jpg");
   background-position: 0 50%;
+  border-radius: 0rem;
+}
+
+.mission-statement {
+  max-width: 1200px;
+  text-align: center;
+  margin: auto;
 }
 
 .card {
@@ -29,6 +36,10 @@
 
 body {
   background-color: #D3D3D3;
+}
+
+.submission-title:hover {
+  color: #dc3545;
 }
 
 .vote {
