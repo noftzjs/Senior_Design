@@ -153,11 +153,13 @@ const LandingPage = () => {
                 <p className="lead mission-statement">Student Life+ is the culmination of ideas from three University of Cincinnati Seniors to leave behind a better campus for underclassmen, providing an open dialogue between the University and the Student Body.</p>
             </div>
             <div>
+                <hr />
                 <div className="row">
-                    <div className="col-3">
-                        <div style={{ float: "center" }}>
+                    <div className="col-2">
+                        <div style={{ float: "right" }}>
                             <div>
-                                <button disabled={!isLoggedin ? true : false} type="button" className="btn btn-danger" onClick={handleOpen}>
+                                {/* disabled={!isLoggedin ? true : false} */}
+                                <button type="button" className="btn btn-danger" onClick={handleOpen}>
                                     New Submission</button>
                                 <Modal
                                     open={isOpen}
@@ -171,17 +173,15 @@ const LandingPage = () => {
                         </div>
                     </div>
                     <div className="col-lg-6 col-centered">
-                        <div style={{ columnCount: "2", columnWidth: "100%" }}>
+                        {/* <div style={{ columnCount: "2", columnWidth: "100%" }}>
                             <h1>Current Requests</h1>
-                        </div>
-                        <hr />
+                        </div> */}
                         <div className='post-container'>
                             <Submissions submissions={submissions} />
                         </div>
                     </div>
-                    <div className="col-3">
+                    <div className="col-4">
                         <h2 className="guidelines-header minimize" onClick={() => setShowGuidelines(!showGuidelines)}>Posting Guidelines</h2>
-                        <hr />
                         {showGuidelines && <Guidelines />}
                     </div>
                 </div>

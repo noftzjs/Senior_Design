@@ -275,11 +275,11 @@ button:hover, button:focus, button:active {
 /* Guidelines */
 
 .guidelines-header {
-  padding-top: 4px;
   padding-bottom: 4px;
 }
 
 .guidelines-header:hover {
+  color: #dc3545;
   text-decoration: underline;
 }
 

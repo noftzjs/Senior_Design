@@ -167,7 +167,7 @@ const Submission = ({ uploadID, title, description, upVotes, userID, anonymous }
       <>
         <span>
           <h1 className="submission-title card-title" type="button" onClick={handleOpen}>{title}</h1>
-          <h2 className="vote">{upVotes}<button className="arrow up"></button><button className="arrow down"></button></h2>
+          {/* <h2 className="vote">{upVotes}<button className="arrow up"></button><button className="arrow down"></button></h2> */}
           <div>
             <Modal
               open={isOpen}
@@ -179,7 +179,10 @@ const Submission = ({ uploadID, title, description, upVotes, userID, anonymous }
             </Modal>
           </div>
         </span>
-        <div class="card-footer bg-transparent border-danger">Submitted By {<SubUsername />}</div>
+        <div className="card-footer bg-transparent border-danger" style={{ columnCount: "2", columnWidth: "100%" }}>
+          <div>Submitted By {<SubUsername />}</div>
+          <div style={{ float: "right" }}>{upVotes} <button className="far fa-heart"></button></div>
+        </div>
         {/* <p className="card-text">Submitted By {<SubUsername />}</p> */}
       </>
     </div>

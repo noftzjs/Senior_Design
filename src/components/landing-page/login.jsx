@@ -111,7 +111,7 @@ const Login = () => {
                 })
               } />
             <hr />
-            <button type="submit" className="btn btn-primary" disabled={isLoading} >{isLoading ? 'Logging in...' : 'Login'}</button>
+            <button type="submit" className="btn btn-danger" disabled={isLoading} >{isLoading ? 'Logging in...' : 'Login'}</button>
           </form>
         )}
       </div>
