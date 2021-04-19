@@ -147,6 +147,14 @@ button:hover, button:focus, button:active {
   background-color: #ecf0f1;
 }
 
+.badge {
+  margin-right: 0.313rem;
+  margin-bottom: 0.313rem;
+}
+
+.card-footer {
+  padding: .75rem .75rem;
+}
 
 .comment-thread {
   width: 100%;
@@ -186,7 +194,6 @@ button:hover, button:focus, button:active {
   align-items: center;
   height: auto;
   font-size: 14px;
-  border-bottom: 2px solid #000000;
 }
 
 .comment-voting {

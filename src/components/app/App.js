@@ -26,7 +26,7 @@ function App() {
           <LandingNav></LandingNav>
           <Switch>
             <Route path="/" component={LandingPage} exact />
-            {/* <Route path="/admin" component={Admin} /> */}
+            <Route path="/admin" component={Admin} />
             <Route path="/progress" component={Progress} />
             <Route path="/login" component={Login} />
             <Route component={Error} />

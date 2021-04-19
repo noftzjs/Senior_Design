@@ -159,7 +159,7 @@ const LandingPage = () => {
                         <div style={{ float: "right" }}>
                             <div>
                                 {/* disabled={!isLoggedin ? true : false} */}
-                                <button type="button" className="btn btn-danger" onClick={handleOpen}>
+                                <button hidden={!isLoggedin ? true : false} type="button" className="btn btn-danger" onClick={handleOpen}>
                                     New Submission</button>
                                 <Modal
                                     open={isOpen}

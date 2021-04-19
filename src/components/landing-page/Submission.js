@@ -11,7 +11,7 @@ export const axios = Axios.create({
   }
 })
 
-const Submission = ({ uploadID, title, description, upVotes, userID, anonymous }) => {
+const Submission = ({ uploadID, title, description, upVotes, userID, anonymous, repost, feedback, suggestion }) => {
 
   const { username } = useContext(AuthContext);
   const { isLoggedin } = useContext(AuthContext);
@@ -21,6 +21,7 @@ const Submission = ({ uploadID, title, description, upVotes, userID, anonymous }
   const [commenter, setCommenter] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [voteCount, setVoteCount] = useState(upVotes);
 
   const fetchUsername = () => {
     axios.get(`Users/${userID}`)
@@ -34,6 +35,7 @@ const Submission = ({ uploadID, title, description, upVotes, userID, anonymous }
           axios.get(`Users/${userID}`)
             .then(response => setSubmitter(response.data))
         );
+        //Updated the url formating
         const getCommenter = await (
           axios.get('comments/uploadID/' + uploadID)
             .then(response => setSubComments(response.data))
@@ -48,10 +50,24 @@ const Submission = ({ uploadID, title, description, upVotes, userID, anonymous }
 
   }, [isLoading]);
 
+  const postSupport = (e) => {
+    e.preventDefault()
+    setVoteCount(voteCount + 1)
+    axios.put(`submissions/${uploadID}`, { upVotes: voteCount })
+      .then(response => {
+        console.log('upvoted');
+        setIsLoading(true);
+      })
+      .catch(error => {
+        console.log(error);
+      })
+    setIsLoading(false);
+  }
+
   const CommentSection = () => {
 
     const [newComment, setNewComment] = useState({
-      userID: 1,
+      userID: 2,
       uploadID: uploadID,
       comment: ""
     });
@@ -80,6 +96,9 @@ const Submission = ({ uploadID, title, description, upVotes, userID, anonymous }
     const changeHandler = (e) => {
       setNewComment({ ...newComment, [e.target.name]: e.target.value });
     }
+    const countHandler = (e) => {
+      setVoteCount({ ...voteCount, [e.target.name]: e.target.value });
+    }
 
     return (
       <form className="search-results">
@@ -98,7 +117,7 @@ const Submission = ({ uploadID, title, description, upVotes, userID, anonymous }
             <a href="" className="username">
             </a>
           </div>
-          <button disabled={!isLoggedin ? true : false} className="btn btn-danger" onClick={postComment}>COMMENT</button>
+          <button hidden={!isLoggedin ? true : false} className="btn btn-danger" onClick={postComment}>COMMENT</button>
           <div className="comment-thread">
             <Comment />
           </div>
@@ -113,10 +132,16 @@ const Submission = ({ uploadID, title, description, upVotes, userID, anonymous }
       <div>
         {subComments.map(subComments => <div className="comment" key={subComments.commentID}>
           <div className="comment-heading">
-            <div className="comment-body">
-              <ComUsername /> - {subComments.comment}
+            <div className="comment-info">
+              <div className="comment-author">
+                <ComUsername />
+              </div>
             </div>
           </div>
+          <div className="comment-body">
+            {subComments.comment}
+          </div>
+          <hr />
         </div>)}
       </div>
     )
@@ -131,9 +156,15 @@ const Submission = ({ uploadID, title, description, upVotes, userID, anonymous }
   }
 
   const SubUsername = () => {
+    let user = '';
+    if (anonymous === 0) {
+      user = "Anonyous"
+    } else {
+      user = submitter.name
+    }
     return (
       <>
-        {submitter.name}
+        {user}
       </>
     );
   }
@@ -151,7 +182,6 @@ const Submission = ({ uploadID, title, description, upVotes, userID, anonymous }
       {<article>
         <span>
           <h1>{title}</h1>
-          {/* <h2 className="vote">{upVotes}</h2> */}
         </span>
         <p>{description}</p>
         <p>Submitted By {<SubUsername />}</p>
@@ -161,6 +191,7 @@ const Submission = ({ uploadID, title, description, upVotes, userID, anonymous }
       </article>}
     </div>
   )
+
 
   return (
     <div className="card border-danger mb-3">
@@ -179,9 +210,19 @@ const Submission = ({ uploadID, title, description, upVotes, userID, anonymous }
             </Modal>
           </div>
         </span>
+        <div>
+          {/* {!isRepost ? <span className="badge badge-danger">Repost</span> : null } */}
+          {repost === "1" && <span className="badge badge-danger">Repost</span>}
+          {feedback === "1" && <span className="badge badge-danger">Feedback</span>}
+          {suggestion === "1" && <span className="badge badge-danger">Suggestions</span>}
+          {/* <span hidden={feedback.value === "0" ? true : false} className="badge badge-danger">Feedback</span>
+          {feedback}
+          <span hidden={!suggestion} className="badge badge-danger">Suggestion</span>
+          {suggestion} */}
+        </div>
         <div className="card-footer bg-transparent border-danger" style={{ columnCount: "2", columnWidth: "100%" }}>
           <div>Submitted By {<SubUsername />}</div>
-          <div style={{ float: "right" }}>{upVotes} <button className="far fa-heart"></button></div>
+          <div style={{ float: "right" }}>{upVotes} <button disabled={!isLoggedin ? true : false} className="far fa-heart" onClick={postSupport}></button></div>
         </div>
         {/* <p className="card-text">Submitted By {<SubUsername />}</p> */}
       </>

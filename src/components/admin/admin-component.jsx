@@ -4,7 +4,13 @@ import ReactTable from "react-table";
 import 'react-table/react-table.css'
 
 
-
+// const Admin = () => {
+//     return(
+//         <div>
+//             <h1>Admin Page</h1>
+//         </div>
+//     )
+// }
 
 class Admin extends Component {
     constructor(props){

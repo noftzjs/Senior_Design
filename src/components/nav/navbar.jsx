@@ -12,6 +12,8 @@ const LandingNav = () => {
 
   const { username, setUsername } = useContext(AuthContext);
 
+  const { isLoggedin } = useContext(AuthContext);
+
   return (
     <Router>
       <Navbar className="navbar-color">
@@ -29,7 +31,7 @@ const LandingNav = () => {
         </Nav>
         <Nav>
           <Nav.Link href="/login" >{username ? "Logout" : "Login"}</Nav.Link>
-          {/* <Nav.Link href="/admin">Admin</Nav.Link> */}
+          <Nav.Link hidden={!isLoggedin ? true : false} href="/admin">Admin</Nav.Link>
         </Nav>
       </Navbar>
     </Router>
